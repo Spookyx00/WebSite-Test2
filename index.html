@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receitas da Web</title>
+    <style>
+        :root {
+            --primary-color: #8B4513; /* Brown */
+            --secondary-color: #F5DEB3; /* Wheat */
+            --accent-color: #A52A2A; /* Red-brown */
+            --text-color: #333;
+            --light-color: #FFF8DC; /* Cornsilk */
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-color);
+            background-color: var(--light-color);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 1rem;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--accent-color);
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: var(--accent-color);
+            margin: 0.5rem auto;
+        }
+        
+        .menu-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .category-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .category-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .category-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .category-card:hover .category-img img {
+            transform: scale(1.1);
+        }
+        
+        .category-info {
+            padding: 1.5rem;
+        }
+        
+        .category-info h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            padding: 0.6rem 1.3rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 1rem;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background: var(--primary-color);
+        }
+        
+        footer {
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .social-links {
+            margin: 1rem 0;
+        }
+        
+        .social-links a {
+            color: white;
+            margin: 0 0.5rem;
+            font-size: 1.5rem;
+        }
+        
+        /* Recipe Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        
+        .modal-content {
+            background: white;
+            margin: 2rem auto;
+            padding: 2rem;
+            max-width: 800px;
+            border-radius: 8px;
+            position: relative;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--accent-color);
+        }
+        
+        .recipe-header {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 2rem;
+        }
+        
+        .recipe-img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .recipe-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .detail-card {
+            background: var(--light-color);
+            padding: 1rem;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .detail-card h4 {
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .recipe-section {
+            margin: 1.5rem 0;
+        }
+        
+        .recipe-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            border-bottom: 1px solid var(--secondary-color);
+            padding-bottom: 0.3rem;
+        }
+        
+        .recipe-section ul, .recipe-section ol {
+            padding-left: 1.5rem;
+        }
+        
+        .recipe-section li {
+            margin-bottom: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .modal-content {
+                margin: 1rem;
+                padding: 1rem;
+            }
+            
+            .recipe-img {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Receitas da Web</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="localizacao.html">Localização</a></li>
+                <li><a href="contactos.html">Contactos</a></li>
+                <li><a href="sobre.html">Sobre</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="hero">
+        <h1>Descubra os Sabores Tradicionais</h1>
+        <p>Receitas autênticas com ingredientes frescos e técnicas tradicionais</p>
+    </section>
+    
+    <div class="container">
+        <h2 class="section-title">Nossas Categorias</h2>
+        
+        <div class="menu-categories">
+            <div class="category-card">
+                <div class="category-img">
+                    <img src="images/Entradas.png" alt="Entradas">
+                </div>
+                <div class="category-info">
+                    <h3>Entradas</h3>
+                    <p>Comece sua refeição com nossos deliciosos aperitivos</p>
+                    <a href="entradas.html" class="btn">Ver Receitas</a>
+                </div>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-img">
+                    <img src="images/Pratos_de_Carne.png" alt="Pratos de Carne">
+                </div>
+                <div class="category-info">
+                    <h3>Pratos de Carne</h3>
+                    <p>Receitas saborosas com diferentes tipos de carne</p>
+                    <a href="carne.html" class="btn">Ver Receitas</a>
+                </div>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-img">
+                    <img src="peixe.jpg" alt="Pratos de Peixe">
+                </div>
+                <div class="category-info">
+                    <h3>Pratos de Peixe</h3>
+                    <p>Pratos frescos do mar para os amantes de peixe</p>
+                    <a href="peixe.html" class="btn">Ver Receitas</a>
+                </div>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-img">
+                    <img src="vegetariano.jpg" alt="Vegetarianos">
+                </div>
+                <div class="category-info">
+                    <h3>Vegetarianos</h3>
+                    <p>Opções deliciosas sem carne para todos os gostos</p>
+                    <a href="vegetariano.html" class="btn">Ver Receitas</a>
+                </div>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-img">
+                    <img src="sobremesas.jpg" alt="Sobremesas">
+                </div>
+                <div class="category-info">
+                    <h3>Sobremesas</h3>
+                    <p>Finalize sua refeição com nossos doces tradicionais</p>
+                    <a href="sobremesas.html" class="btn">Ver Receitas</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Recipe Modal -->
+    <div id="recipeModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div class="recipe-header">
+                <h2 id="recipeTitle">Sopa de Cação</h2>
+                <img id="recipeImage" src="sopa_cacao.jpg" alt="Sopa de Cação" class="recipe-img">
+                <div class="recipe-details">
+                    <div class="detail-card">
+                        <h4>Tempo</h4>
+                        <p>45 min</p>
+                    </div>
+                    <div class="detail-card">
+                        <h4>Dificuldade</h4>
+                        <p>Média</p>
+                    </div>
+                    <div class="detail-card">
+                        <h4>Custo</h4>
+                        <p>€€</p>
+                    </div>
+                    <div class="detail-card">
+                        <h4>Porções</h4>
+                        <p>4</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="recipe-section">
+                <h3>Ingredientes</h3>
+                <ul id="ingredientsList">
+                    <li>500g de cação</li>
+                    <li>2 batatas</li>
+                    <li>1 cebola</li>
+                    <li>2 dentes de alho</li>
+                    <li>1 folha de louro</li>
+                    <li>Sal e pimenta q.b.</li>
+                    <li>1 colher de sopa de azeite</li>
+                    <li>1 litro de água</li>
+                </ul>
+            </div>
+            
+            <div class="recipe-section">
+                <h3>Modo de Preparação</h3>
+                <ol id="preparationSteps">
+                    <li>Descasque e pique a cebola e o alho.</li>
+                    <li>Numa panela, aqueça o azeite e refogue a cebola e o alho.</li>
+                    <li>Adicione o cação cortado em pedaços e deixe cozinhar por 5 minutos.</li>
+                    <li>Junte as batatas descascadas e cortadas em cubos.</li>
+                    <li>Adicione a água, o louro, sal e pimenta.</li>
+                    <li>Deixe cozinhar por 30 minutos em lume brando.</li>
+                    <li>Retire o louro e sirva quente.</li>
+                </ol>
+            </div>
+            
+            <div class="recipe-section">
+                <h3>Vídeo</h3>
+                <div class="video-container">
+                    <iframe width="100%" height="400" src="https://www.youtube.com/embed/example" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <h3>Receitas da Web</h3>
+            <p>As melhores receitas tradicionais portuguesas</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-pinterest"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p>&copy; 2025 Receitas da Web. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Sample function to open modal - in a real implementation, you would
+        // fetch the correct recipe data based on what was clicked
+        function openRecipe(recipeId) {
+            // Here you would fetch the recipe data from a database or JSON file
+            // For now we'll just show the modal with sample data
+            document.getElementById('recipeModal').style.display = 'block';
+        }
+        
+        function closeModal() {
+            document.getElementById('recipeModal').style.display = 'none';
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('recipeModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+        
+        // In a real implementation, you would have functions to load different recipes
+        // For example:
+        /*
+        function loadRecipe(recipeId) {
+            fetch(`recipes/${recipeId}.json`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('recipeTitle').textContent = data.title;
+                    document.getElementById('recipeImage').src = data.image;
+                    // ... populate all other fields
+                    openRecipe();
+                });
+        }
+        */
+    </script>
+    <!-- Font Awesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>
+
+
+

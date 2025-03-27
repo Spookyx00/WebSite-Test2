@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entradas - Receitas da Web</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        /* Header styles */
+        header {
+            background: #8B4513;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        /* Navigation menu */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+        
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        /* Main content styles */
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        h2 {
+            color: #8B4513;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #F5DEB3;
+            padding-bottom: 0.5rem;
+        }
+        
+        .recipe-meta {
+            display: flex;
+            gap: 1rem;
+            margin: 0.5rem 0;
+            color: #666;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #8B4513;
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 1rem;
+            transition: background 0.3s;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background: #A0522D;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            background: #F5DEB3;
+            margin-top: 2rem;
+        }
+        
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 90%;
+            max-height: 90vh;
+            overflow: auto;
+            position: relative;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #8B4513;
+        }
+        
+        .recipe-image {
+            max-width: 100%;
+            max-height: 300px;
+            display: block;
+            margin: 0 auto 1rem;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+        
+        .recipe-info {
+            display: flex;
+            justify-content: space-around;
+            margin: 1rem 0;
+            padding: 1rem 0;
+            border-top: 1px solid #F5DEB3;
+            border-bottom: 1px solid #F5DEB3;
+        }
+        
+        .info-item {
+            text-align: center;
+        }
+        
+        .info-label {
+            font-weight: bold;
+            color: #8B4513;
+            display: block;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #F5DEB3;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .preparation {
+            margin-top: 1.5rem;
+        }
+        
+        .preparation h3 {
+            color: #8B4513;
+            margin-bottom: 0.5rem;
+        }
+        
+        .preparation p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header identical to index.html -->
+    <header>
+        <div class="logo">Receitas da Web</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="localizacao.html">Localização</a></li>
+            <li><a href="contactos.html">Contactos</a></li>
+            <li><a href="sobre.html">Sobre</a></li>
+        </ul>
+    </header>
+
+    <main class="container">
+        <h2>Entradas</h2>
+        
+        <!-- Sopa de Cação -->
+        <div class="recipe">
+            <h3>Sopa de Cação</h3>
+            <div class="recipe-meta">
+                <span>⏱ 45 min</span>
+                <span>👥 6 pessoas</span>
+                <span>💶 €€</span>
+            </div>
+            <p>Deliciosa sopa tradicional portuguesa feita com cação fresco.</p>
+            <button class="btn" onclick="showSopaCacao()">Ver Receita</button>
+        </div>
+        
+        <!-- Sopa de Castanha -->
+        <div class="recipe">
+            <h3>Sopa de Castanha</h3>
+            <div class="recipe-meta">
+                <span>⏱ 40 min</span>
+                <span>👥 4 pessoas</span>
+                <span>💶 €€</span>
+            </div>
+            <p>Aqueça a mesa com esta deliciosa sopa de castanhas.</p>
+            <button class="btn" onclick="showSopaCastanha()">Ver Receita</button>
+        </div>
+        
+        <!-- Ameijoas à Bulhão Pato -->
+        <div class="recipe">
+            <h3>Ameijoas à Bulhão Pato</h3>
+            <div class="recipe-meta">
+                <span>⏱ 30 min</span>
+                <span>👥 4 pessoas</span>
+                <span>💶 €€</span>
+            </div>
+            <p>Esta receita de amêijoas à bulhão pato é um petisco clássico e uma escolha cheia de sabor.</p>
+            <button class="btn" onclick="showAmeijoas()">Ver Receita</button>
+        </div>
+        
+        <!-- Lapas ao Molho Afonso -->
+        <div class="recipe">
+            <h3>Lapas ao Molho Afonso</h3>
+            <div class="recipe-meta">
+                <span>⏱ 20 min</span>
+                <span>👥 5 pessoas</span>
+                <span>💶 €€€</span>
+            </div>
+            <p>As lapas são um dos petiscos de eleição das ilhas açorianas.</p>
+            <button class="btn" onclick="showLapas()">Ver Receita</button>
+        </div>
+    </main>
+
+    <!-- Recipe Modal -->
+    <div id="recipeModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 Receitas da Web</p>
+    </footer>
+
+    <script>
+        // Function to show Sopa de Cação
+        function showSopaCacao() {
+            const content = `
+                <h2>Sopa de Cação</h2>
+                <img src="images/sopa_cacao.png" alt="Sopa de Cação" class="recipe-image">
+                
+                <div class="recipe-info">
+                    <div class="info-item">
+                        <span class="info-label">Serve</span>
+                        <span>6 pessoas</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Custo Total</span>
+                        <span>11,35€</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Custo por Pessoa</span>
+                        <span>1,87€</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Tempo</span>
+                        <span>45 min</span>
+                    </div>
+                </div>
+                
+                <h3>Ingredientes</h3>
+                <table>
+                    <tr>
+                        <th>Quantidade</th>
+                        <th>Designação</th>
+                        <th>Preço por KG/Un/Lt</th>
+                        <th>Custo Final</th>
+                    </tr>
+                    <tr>
+                        <td>1kg</td>
+                        <td>Postas altas de cação</td>
+                        <td>9,99€/kg</td>
+                        <td>9,99€</td>
+                    </tr>
+                    <tr>
+                        <td>0,5l</td>
+                        <td>Vinagre</td>
+                        <td>0,69€/l</td>
+                        <td>0,35€</td>
+                    </tr>
+                    <tr>
+                        <td>1Un</td>
+                        <td>Louro</td>
+                        <td>0,69€/10Un</td>
+                        <td>0,05€</td>
+                    </tr>
+                    <tr>
+                        <td>1l</td>
+                        <td>Água</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>0,2kg</td>
+                        <td>Cebola</td>
+                        <td>1,49€/kg</td>
+                        <td>0,30€</td>
+                    </tr>
+                    <tr>
+                        <td>0,020l</td>
+                        <td>Azeite</td>
+                        <td>5,80€/l</td>
+                        <td>0,12€</td>
+                    </tr>
+                    <tr>
+                        <td>2Un</td>
+                        <td>Ovos</td>
+                        <td>0,27€/Un</td>
+                        <td>0,54€</td>
+                    </tr>
+                    <tr>
+                        <td>q.b.</td>
+                        <td>Sumo de limão, pimenta, farinha, coentros, sal</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align: right;"><strong>Custo Total</strong></td>
+                        <td><strong>11,35€</strong></td>
+                    </tr>
+                </table>
+                
+                <div class="preparation">
+                    <h3>Modo de Preparação:</h3>
+                    <p>Ponha o cação de molho em água com 0,5 dl de vinagre, sal e louro, durante cerca de 2 horas. Escorra e coza o cação na água a ferver, temperada com sal, durante 10 minutos. Escorra o peixe, retire-lhe as espinhas e reserve o caldo da cozedura. Pique os alhos e a cebola e leve a cozer com azeite. Junte os coentros picados e adicione um pouco do caldo da cozedura do cação e a farinha, dissolvida no restante vinagre. Mexa e deixe cozer um pouco sobre lume brando. Vá adicionando, a pouco e pouco, o restante caldo da cozedura do peixe.</p>
+                    <p>Desfaça as gemas com um pouco da sopa. Junte depois as gemas já desfeitas à restante sopa, mexendo sempre. Retifique o sal e tempere com pimenta. Introduza o peixe e, assim que levantar fervura, retire do lume e regue com sumo de limão.</p>
+                    <p>Sirva sobre fatias finas de pão torrado.</p>
+                </div>
+            `;
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('recipeModal').style.display = 'flex';
+        }
+
+        // Function to show Sopa de Castanha
+        function showSopaCastanha() {
+            const content = `
+                <h2>Sopa de Castanha</h2>
+                <img src="images/sopa_castanha.png" alt="Sopa de Castanha" class="recipe-image">
+                
+                <div class="recipe-info">
+                    <div class="info-item">
+                        <span class="info-label">Serve</span>
+                        <span>4 pessoas</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Custo Total</span>
+                        <span>10,12€</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Custo por Pessoa</span>
+                        <span>2,53€</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Tempo</span>
+                        <span>40 min</span>
+                    </div>
+                </div>
+                
+                <h3>Ingredientes</h3>
+                <table>
+                    <tr>
+                        <th>Quantidade</th>
+                        <th>Designação</th>
+                        <th>Preço por KG/Un/Lt</th>
+                        <th>Custo Final</th>
+                    </tr>
+                    <tr>
+                        <td>0,0020 ml</td>
+                        <td>Azeite</td>
+                        <td>5,80€</td>
+                        <td>0,12€</td>
+                    </tr>
+                    <tr>
+                        <td>0,200kg</td>
+                        <td>Cebola</td>
+                        <td>1,49€</td>
+                        <td>0,29€</td>
+                    </tr>
+                    <tr>
+                        <td>0,05 kg</td>
+                        <td>Folha de louro</td>
+                        <td>0,69€</td>
+                        <td>0,35€</td>
+                    </tr>
+                    <tr>
+                        <td>0,400kg</td>
+                        <td>Castanhas congeladas</td>
+                        <td>9,99€</td>
+                        <td>3,99€</td>
+                    </tr>
+                    <tr>
+                        <td>0,215kg</td>
+                        <td>Cubo de caldo de legumes</td>
+                        <td>21,50€</td>
+                        <td>4,62€</td>
+                    </tr>
+                    <tr>
+                        <td>Q.b</td>
+                        <td>Água, Sal, Pimenta</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>0,200ml</td>
+                        <td>Natas</td>
+                        <td>3,75€</td>
+                        <td>0,75€</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align: right;"><strong>Custo Total</strong></td>
+                        <td><strong>10,12€</strong></td>
+                    </tr>
+                </table>
+                
+                <div class="preparation">
+                    <h3>Modo de Preparação:</h3>
+                    <p>Num tacho coloque 1 fio de azeite e adicione a cebola laminada e a folha de louro. Deixar refogar por alguns instantes.</p>
+                    <p>Junte as castanhas congeladas e 1 cubo de caldo de legumes. Tempere com sal e pimenta e deixe cozer por 20 a 25 minutos.</p>
+                    <p>Retire do lume e com uma varinha mágica triture bem. Adicione as natas de culinária pouco a pouco e vá triturando até obter uma consistência cremosa.</p>
+                    <p>Sirva a sopa de castanha e decore com natas culinária e pimenta.</p>
+                </div>
+            `;
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('recipeModal').style.display = 'flex';
+        }
+
+        // Function to show Ameijoas à Bulhão Pato
+        function showAmeijoas() {
+            const content = `
+                <h2>Amêijoas à Bulhão Pato</h2>
+                <img src="images/ameijoas_bulhao.png" alt="Amêijoas à Bulhão Pato" class="recipe-image">
+                
+                <div class="recipe-info">
+                    <div class="info-item">
+                        <span class="info-label">Serve</span>
+                        <span>4 pessoas</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Custo Total</span>
+                        <span>10,93€</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Custo por Pessoa</span>
+                        <span>2,73€</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Tempo</span>
+                        <span>30 min</span>
+                    </div>
+                </div>
+                
+                <h3>Ingredientes</h3>
+                <table>
+                    <tr>
+                        <th>Quantidade</th>
+                        <th>Designação</th>
+                        <th>Preço por KG/Un/Lt</th>
+                        <th>Custo Final</th>
+                    </tr>
+                    <tr>
+                        <td>1kg</td>
+                        <td>Amêijoa</td>
+                        <td>2,99€</td>
+                        <td>2,99€</td>
+                    </tr>
+                    <tr>
+                        <td>15ml</td>
+                        <td>Azeite</td>
+                        <td>5,80€</td>
+                        <td>0,87€</td>
+                    </tr>
+                    <tr>
+                        <td>200g</td>
+                        <td>Limão</td>
+                        <td>1,99€</td>
+                        <td>3,98€</td>
+                    </tr>
+                    <tr>
+                        <td>200g</td>
+                        <td>Coentros</td>
+                        <td>17,80€</td>
+                        <td>3,59€</td>
+                    </tr>
+                    <tr>
+                        <td>Q.B</td>
+                        <td>Sal, Pimenta</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align: right;"><strong>Custo Total</strong></td>
+                        <td><strong>10,93€</strong></td>
+                    </tr>
+                </table>
+                
+                <div class="preparation">
+                    <h3>Modo de Preparação:</h3>
+                    <p>Lave as amêijoas e ponha de molho em água fria durante algumas horas.</p>
+                    <p>Leva-se ao lume o azeite, deixa-se aquecer e juntam-se as amêijoas e os coentros finamente picados e tempera-se com sal e pimenta.</p>
+                    <p>Mexe-se o recipiente de vez em quando.</p>
+                    <p>Quando todas as amêijoas estiverem abertas, regam-se com o sumo de meio limão.</p>
+                </div>
+            `;
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('recipeModal').style.display = 'flex';
+        }
+
+        // Function to show Lapas ao Molho Afonso
+        function showLapas() {
+            const content = `
+                <h2>Lapas ao molho Afonso</h2>
+                <img src="images/lapas_ao_molho_afonso.png" alt="Lapas ao Molho Afonso" class="recipe-image">
+                
+                <div class="recipe-info">
+                    <div class="info-item">
+                        <span class="info-label">Serve</span>
+                        <span>5 pessoas</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Custo Total</span>
+                        <span>30.94€</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Custo por Pessoa</span>
+                        <span>6.19€</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Tempo</span>
+                        <span>20 min</span>
+                    </div>
+                </div>
+                
+                <h3>Ingredientes</h3>
+                <table>
+                    <tr>
+                        <th>Quantidade</th>
+                        <th>Designação</th>
+                        <th>Preço por KG/Un/Lt</th>
+                        <th>Custo Final</th>
+                    </tr>
+                    <tr>
+                        <td>2 kg</td>
+                        <td>Lapas miúdas vivas</td>
+                        <td>15€ kg</td>
+                        <td>30€</td>
+                    </tr>
+                    <tr>
+                        <td>0,250 Kg</td>
+                        <td>Cebola grande</td>
+                        <td>1,49€ kg</td>
+                        <td>0,37€</td>
+                    </tr>
+                    <tr>
+                        <td>0,1 L</td>
+                        <td>Azeite</td>
+                        <td>5,67€ L</td>
+                        <td>0,57€</td>
+                    </tr>
+                    <tr>
+                        <td>Q.B.</td>
+                        <td>Dentes de alho, Ramo de salsa, Pimenta vermelha doce ou picante, Sal, Pimenta</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align: right;"><strong>Custo Total</strong></td>
+                        <td><strong>30,94€</strong></td>
+                    </tr>
+                </table>
+                
+                <div class="preparation">
+                    <h3>Modo de Preparação:</h3>
+                    <p>Lavam-se as lapas.</p>	
+                    <p>Picam-se a cebola e o alho e «trespassam-se» com o azeite (não se deixem alourar).</p>
+                    <p>Juntam-se depois a pimenta vermelha e a salsa picadas e temperam-se com sal e pimenta.</p>
+                    <p>Introduzem-se as lapas e deixam-se cozer rapidamente (se cozerem muito, as lapas tornam-se duras).</p>
+                    <p>Agita-se o tacho, não se deve mexer com a colher.</p>
+                    <p>Rectificam-se os temperos, tendo em conta o sal que as lapas já têm.</p>
+                    <p>Variante de S. Miguel: Na altura em que se introduzem as lapas junta-se meio dl de vinho branco no qual se dissolve uma colher de chá de farinha de trigo.</p>
+                    <p>Servem-se como primeiro prato ou petisco.</p>
+                </div>
+            `;
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('recipeModal').style.display = 'flex';
+        }
+
+        // Function to close modal
+        function closeModal() {
+            document.getElementById('recipeModal').style.display = 'none';
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('recipeModal')) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>

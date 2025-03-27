@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pratos de Carne - Receitas da Web</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f5f0;
+        }
+        
+        /* Header styles */
+        header {
+            background: #8B4513;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        /* Navigation menu */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+        
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        /* Main content styles */
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        h1 {
+            color: #8B4513;
+            text-align: center;
+            margin: 2rem 0;
+            font-size: 2.2rem;
+        }
+        
+        .recipe {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .recipe h2 {
+            color: #8B4513;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .recipe-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin: 1rem 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #8B4513;
+            color: white;
+            padding: 0.7rem 1.5rem;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 1rem;
+            transition: background 0.3s;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background: #A0522D;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            background: #F5DEB3;
+            margin-top: 2rem;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 90%;
+            max-height: 90vh;
+            overflow: auto;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.8rem;
+            color: #8B4513;
+            cursor: pointer;
+        }
+        
+        .recipe-image {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            object-fit: cover;
+        }
+        
+        .recipe-info {
+            display: flex;
+            justify-content: space-around;
+            margin: 1rem 0;
+            padding: 1rem 0;
+            border-top: 1px solid #F5DEB3;
+            border-bottom: 1px solid #F5DEB3;
+        }
+        
+        .info-item {
+            text-align: center;
+        }
+        
+        .info-label {
+            font-weight: bold;
+            color: #8B4513;
+            display: block;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #F5DEB3;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .preparation {
+            margin-top: 1.5rem;
+        }
+        
+        .preparation h3 {
+            color: #8B4513;
+            margin-bottom: 0.5rem;
+        }
+        
+        .preparation p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Receitas da Web</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="localizacao.html">Localização</a></li>
+            <li><a href="contactos.html">Contactos</a></li>
+            <li><a href="sobre.html">Sobre</a></li>
+        </ul>
+    </header>
+
+    <main class="container">
+        <h1>Pratos de Carne</h1>
+        
+        <!-- Carne de Vaca à Antiga -->
+        <div class="recipe">
+            <h2>Carne de Vaca à Antiga</h2>
+            <div class="recipe-meta">
+                <span>⏱ 120 min</span>
+                <span>👥 8 pessoas</span>
+                <span>💶 €€</span>
+            </div>
+            <p>Carne de vaca cozida lentamente com vinho e legumes, ao estilo tradicional.</p>
+            <button class="btn" onclick="showCarneVaca()">Ver Receita</button>
+        </div>
+
+        <!-- Ensopado de Borrego -->
+        <div class="recipe">
+            <h2>Ensopado de Borrego</h2>
+            <div class="recipe-meta">
+                <span>⏱ 180 min</span>
+                <span>👥 6 pessoas</span>
+                <span>💶 €€€</span>
+            </div>
+            <p>Delicioso ensopado de borrego com batatas e ervas aromáticas.</p>
+            <button class="btn" onclick="showEnsopadoBorrego()">Ver Receita</button>
+        </div>
+
+        <!-- Carne de Porco à Ribatejana -->
+        <div class="recipe">
+            <h2>Carne de Porco à Ribatejana</h2>
+            <div class="recipe-meta">
+                <span>⏱ 90 min</span>
+                <span>👥 2 pessoas</span>
+                <span>💶 €€</span>
+            </div>
+            <p>Carne de porco marinada em vinho e alhos, típica da região do Ribatejo.</p>
+            <button class="btn" onclick="showPorcoRibatejana()">Ver Receita</button>
+        </div>
+
+        <!-- Cozido à Madeirense -->
+        <div class="recipe">
+            <h2>Cozido à Madeirense</h2>
+            <div class="recipe-meta">
+                <span>⏱ 240 min</span>
+                <span>👥 6 pessoas</span>
+                <span>💶 €€€</span>
+            </div>
+            <p>Variedade de carnes, enchidos e legumes cozidos, especialidade da Madeira.</p>
+            <button class="btn" onclick="showCozidoMadeirense()">Ver Receita</button>
+        </div>
+    </main>
+
+    <!-- Recipe Modal -->
+    <div id="recipeModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 Receitas da Web</p>
+    </footer>
+
+    <script>
+        // Function to show Carne de Vaca à Antiga
+        function showCarneVaca() {
+            const content = `
+                <h2>Carne de Vaca à Antiga</h2>
+                <img src="images_carne/carne_vaca_antiga.png" alt="Carne de Vaca à Antiga" class="recipe-image">
+                
+                <div class="recipe-info">
+                    <div class="info-item">
+                        <span class="info-label">Serve</span>
+                        <span>8 pessoas</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Custo Total</span>
+                        <span>16,79€</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Custo por Pessoa</span>
+                        <span>2,10€</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Tempo</span>
+                        <span>120 min</span>
+                    </div>
+                </div>
+                
+                <h3>Ingredientes</h3>
+                <table>
+                    <tr>
+                        <th>Quantidade</th>
+                        <th>Designação</th>
+                        <th>Preço por KG/Un/Lt</th>
+                        <th>Custo Final</th>
+                    </tr>
+                    <tr>
+                        <td>1 kg</td>
+                        <td>Ganso redondo</td>
+                        <td>14,99€ kg</td>
+                        <td>14,99€</td>
+                    </tr>
+                    <tr>
+                        <td>2 Un</td>
+                        <td>Louro</td>
+                        <td>0,69€/10 Un</td>
+                        <td>0,10€</td>
+                    </tr>
+                    <tr>
+                        <td>0,25 L</td>
+                        <td>Vinho branco</td>
+                        <td>0,85€ L</td>
+                        <td>0,21€</td>
+                    </tr>
+                    <tr>
+                        <td>0,2 Kg</td>
+                        <td>Cebola</td>
+                        <td>1,49€ Kg</td>
+                        <td>0,30€</td>
+                    </tr>
+                    <tr>
+                        <td>0,5 Kg</td>
+                        <td>Tomates (ou polpa de tomate)</td>
+                        <td>2,49€ Kg</td>
+                        <td>1,25€</td>
+                    </tr>
+                    <tr>
+                        <td>0,040 Kg</td>
+                        <td>Banha</td>
+                        <td>3,87€ Kg</td>
+                        <td>0,15€</td>
+                    </tr>
+                    <tr>
+                        <td>Q.B.</td>
+                        <td>Alho, Massa de malagueta, Pimenta da jamaica, Colher de chá de colorau, Sal, Azeite, Óleo, Canela</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align: right;"><strong>Custo Total</strong></td>
+                        <td><strong>16,79€</strong></td>
+                    </tr>
+                </table>
+                
+                <div class="preparation">
+                    <h3>Modo de Preparação:</h3>
+                    <p>Num gral (almofariz) pisam-se os dentes de alho com a massa de malagueta, a pimenta-da-jamaica, uma folha de louro, pimenta branca e sal grosso. Estando tudo em papa adiciona-se o vinho branco. Esfrega-se a carne com esta vinha-de-alhos e deixa-se ficar assim de um dia para o outro, virando-a de vez em quando.</p>
+                    <p>No dia seguinte deita-se numa frigideira a cebola ás rodelas, o azeite, a banha e o óleo.</p>
+                    <p>Leva-se a aquecer, introduz-se a carne e deixa-se rosar (alourar) de todos os lados, sem queimar. Coloca-se a carne numa assadeira com a cebola e a gordura e junta-se uma folha de louro cortada, a canela, o colorau, o tomate sem pele e sem grainhas (ou a polpa de tomate) e a vinha-de-alhos e leva-se a assar no forno.</p>
+                    <p>Quando a carne estiver quase pronta introduzem-se na assadeira batatinhas novas previamente cozidas em água e sal e depois alouradas na frigideira.</p>
+                </div>
+            `;
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('recipeModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Function to show Ensopado de Borrego
+        function showEnsopadoBorrego() {
+            const content = `
+                <h2>Ensopado de Borrego</h2>
+                <img src="images_carne/ensopado_borrego.png" alt="Ensopado de Borrego" class="recipe-image">
+                
+                <div class="recipe-info">
+                    <div class="info-item">
+                        <span class="info-label">Serve</span>
+                        <span>6 pessoas</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Custo Total</span>
+                        <span>26,19€</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Custo por Pessoa</span>
+                        <span>4,37€</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Tempo</span>
+                        <span>180 min</span>
+                    </div>
+                </div>
+                
+                <h3>Ingredientes</h3>
+                <table>
+                    <tr>
+                        <th>Quantidade</th>
+                        <th>Designação</th>
+                        <th>Preço por KG/Un/Lt</th>
+                        <th>Custo Final</th>
+                    </tr>
+                    <tr>
+                        <td>2kg</td>
+                        <td>Carne de borrego</td>
+                        <td>10,99€/kg</td>
+                        <td>21,98€</td>
+                    </tr>
+                    <tr>
+                        <td>0,5kg</td>
+                        <td>Cebolas</td>
+                        <td>1,49€/kg</td>
+                        <td>0,75€</td>
+                    </tr>
+                    <tr>
+                        <td>0,2kg</td>
+                        <td>Banha</td>
+                        <td>3,87€/kg</td>
+                        <td>0,77€</td>
+                    </tr>
+                    <tr>
+                        <td>1 Un</td>
+                        <td>Louro</td>
+                        <td>0,69€/Un</td>
+                        <td>0,05€</td>
+                    </tr>
+                    <tr>
+                        <td>1kg</td>
+                        <td>Pão</td>
+                        <td>2,64€/kg</td>
+                        <td>2,64€</td>
+                    </tr>
+                    <tr>
+                        <td>q.b</td>
+                        <td>Farinha, sal, alho, pimenta em grão, colorau doce, malagueta</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align: right;"><strong>Custo Total</strong></td>
+                        <td><strong>26,19€</strong></td>
+                    </tr>
+                </table>
+                
+                <div class="preparation">
+                    <h3>Modo de Preparação:</h3>
+                    <p>Corta-se a carne em bocados, que se passam pela farinha. Retiram-se 3 colheres de sopa de banha e aquece-se a restante num tacho. Introduz-se a carne neste tacho e deixa-se alourar.</p>
+                    <p>À parte, noutro tacho, faz-se um refogado com a restante banha, as cebolas cortadas ás rodelas, os dentes de alho cortados, o louro e a pimenta em grão.</p>
+                    <p>Introduz-se a carne no refogado, assim como os restantes temperos e a água necessária para o ensopado, que pode ser acrescentada quando necessário.</p>
+                    <p>Na altura de servir, tem-se o pão cortado em fatias num tabuleiro, sobre a qual se deita o caldo do ensopado depois dos temperos retificados.</p>
+                    <p>A carne serve-se à parte numa travessa mas ao mesmo tempo.</p>
+                </div>
+            `;
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('recipeModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Function to show Carne de Porco à Ribatejana
+        function showPorcoRibatejana() {
+            const content = `
+                <h2>Carne de Porco à Ribatejana</h2>
+                <img src="images_carne/porco_ribatejana.png" alt="Carne de Porco à Ribatejana" class="recipe-image">
+                
+                <div class="recipe-info">
+                    <div class="info-item">
+                        <span class="info-label">Serve</span>
+                        <span>2 pessoas</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Custo Total</span>
+                        <span>9,27€</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Custo por Pessoa</span>
+                        <span>4,63€</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Tempo</span>
+                        <span>90 min</span>
+                    </div>
+                </div>
+                
+                <h3>Ingredientes</h3>
+                <table>
+                    <tr>
+                        <th>Quantidade</th>
+                        <th>Designação</th>
+                        <th>Preço por KG/Un/Lt</th>
+                        <th>Custo Final</th>
+                    </tr>
+                    <tr>
+                        <td>0,750 Kg</td>
+                        <td>Carne de porco limpa</td>
+                        <td>4,98€</td>
+                        <td>3,74€</td>
+                    </tr>
+                    <tr>
+                        <td>0,015 Kg</td>
+                        <td>Dentes de Alho</td>
+                        <td>1,09€</td>
+                        <td>0,019€</td>
+                    </tr>
+                    <tr>
+                        <td>0,2 Kg</td>
+                        <td>Cebola</td>
+                        <td>1,49€</td>
+                        <td>0,30€</td>
+                    </tr>
+                    <tr>
+                        <td>0,1 Kg</td>
+                        <td>Banha</td>
+                        <td>3,87€</td>
+                        <td>0,39€</td>
+                    </tr>
+                    <tr>
+                        <td>1,2 Kg</td>
+                        <td>Batatas pequeninas</td>
+                        <td>3,20€</td>
+                        <td>3,84€</td>
+                    </tr>
+                    <tr>
+                        <td>0,3 Kg</td>
+                        <td>Molhinho de Grelos</td>
+                        <td>3,27€</td>
+                        <td>0,98€</td>
+                    </tr>
+                    <tr>
+                        <td>q.b</td>
+                        <td>Sal, Pimenta, Colorau, Vinho Branco</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align: right;"><strong>Custo Total</strong></td>
+                        <td><strong>9,27€</strong></td>
+                    </tr>
+                </table>
+                
+                <div class="preparation">
+                    <h3>Modo de Preparação:</h3>
+                    <p>Temperar a carne: Comece por cortar a carne de porco em pedaços médios. Tempere com sal, pimenta, alho picado, colorau e o vinho branco. Deixe marinar por cerca de 1 a 2 horas para que os sabores se infiltrem na carne.</p>
+                    <p>Dourar a carne: Numa panela grande, adicione um fio de azeite e leve ao lume. Quando o azeite estiver quente, adicione os pedaços de carne de porco e deixe dourar de todos os lados, para selar bem a carne.</p>
+                    <p>Adicionar os vegetais: Junte a cebola picada, o pimentão e o tomate. Mexa bem e deixe refogar por alguns minutos, até que os vegetais estejam ligeiramente amolecidos.</p>
+                    <p>Cozinhar: Adicione a folha de louro e, se desejar, o vinagre. Cubra a carne com água (ou caldo de carne, se preferir um sabor mais rico) e deixe cozinhar em fogo médio...</p>
+                </div>
+            `;
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('recipeModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Function to show Cozido à Madeirense
+        function showCozidoMadeirense() {
+            const content = `
+                <h2>Cozido à Madeirense</h2>
+                <img src="images_carne/cozido_madeirense.png" alt="Cozido à Madeirense" class="recipe-image">
+                
+                <div class="recipe-info">
+                    <div class="info-item">
+                        <span class="info-label">Serve</span>
+                        <span>6 pessoas</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Custo Total</span>
+                        <span>21,46€</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Custo por Pessoa</span>
+                        <span>3,41€</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Tempo</span>
+                        <span>240 min</span>
+                    </div>
+                </div>
+                
+                <h3>Ingredientes</h3>
+                <table>
+                    <tr>
+                        <th>Quantidade</th>
+                        <th>Designação</th>
+                        <th>Preço por KG/Un/Lt</th>
+                        <th>Custo Final</th>
+                    </tr>
+                    <tr>
+                        <td>1 kg</td>
+                        <td>Carne de Porco Magra Salgada</td>
+                        <td>6,99 kg</td>
+                        <td>6,99€</td>
+                    </tr>
+                    <tr>
+                        <td>4 un</td>
+                        <td>Batatas-Doces</td>
+                        <td>0,99 kg</td>
+                        <td>3,96€</td>
+                    </tr>
+                    <tr>
+                        <td>0,8 kg</td>
+                        <td>Batatas</td>
+                        <td>1,59 kg</td>
+                        <td>1,27€</td>
+                    </tr>
+                    <tr>
+                        <td>4 un</td>
+                        <td>Nabos</td>
+                        <td>0,74 kg</td>
+                        <td>2,96€</td>
+                    </tr>
+                    <tr>
+                        <td>4 un</td>
+                        <td>Cenouras</td>
+                        <td>0,16 kg</td>
+                        <td>0,64€</td>
+                    </tr>
+                    <tr>
+                        <td>1 un</td>
+                        <td>Couve Coração-de-Boi</td>
+                        <td>0,94 kg</td>
+                        <td>0,94€</td>
+                    </tr>
+                    <tr>
+                        <td>1 un</td>
+                        <td>Abóbora (verde)</td>
+                        <td>1,57 kg</td>
+                        <td>1,57€</td>
+                    </tr>
+                    <tr>
+                        <td>0,2 Kg</td>
+                        <td>Cuscuz</td>
+                        <td>2,20 kg</td>
+                        <td>0,44€</td>
+                    </tr>
+                    <tr>
+                        <td>1 un</td>
+                        <td>Ramo de Tomilho</td>
+                        <td>1,69 kg</td>
+                        <td>1,69€</td>
+                    </tr>
+                    <tr>
+                        <td>Q.B.</td>
+                        <td>Sal</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align: right;"><strong>Custo Total</strong></td>
+                        <td><strong>21,46€</strong></td>
+                    </tr>
+                </table>
+                
+                <div class="preparation">
+                    <h3>Modo de Preparação:</h3>
+                    <p>Lava-se a carne e coze-se em água. Quando a carne estiver quase cozida, juntam-se-lhe todos os legumes inteiros e lavados. À couve devem retirar-se as folhas exteriores mais rijas. Junta-se ainda um ramo de tomilho.</p>	
+                    <p>À medida que os legumes cozem, vão-se retirando do caldo. Molha-se o cuscuz com um pouco de água e coloca-se na parte funda do cuscuzeiro.</p>
+                    <p>Logo que a carne e todos os legumes estiverem cozidos (estes já retirados da panela) coloca-se o cuscuzeiro sobre a panela para que o cuscuz seja cozido a vapor. Para evitar que o vapor se escape, coloca-se um pano na borda da panela entre esta e o cuscuzeiro.</p>
+                    <p>Depois de tudo pronto, volta a introduzir-se no caldo (salvo o cuscuz), para que o cozido seja servido bem quente.</p>
+                    <p>O cuscuzeiro é hoje substituído pela bola do arroz. Neste caso, a bola com o cuscuz é introduzida no caldo onde o cozido coze. Introduz-se nos últimos 10 minutos. O cuscuz, que outrora era preparado pelos próprios, vende-se agora nas mercearias pronto a utilizar.</p>
+                    <p>Quando preparam em casa o cuscuz (granulado), para saberem se a água do cuscuzeiro não se evaporou toda e para evitar perder o vapor fazem a verificação deitando algumas pedrinhas ou conchas de lapas ou de berbigão no fundo do cuscuzeiro. Se sobre o lume, ao ferver, não telintarem, é sinal de que a água se esgotou, pelo que se torna necessário juntar mais.</p>
+                </div>
+            `;
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('recipeModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Function to close modal
+        function closeModal() {
+            document.getElementById('recipeModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('recipeModal')) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
